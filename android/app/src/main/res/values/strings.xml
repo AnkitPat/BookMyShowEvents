@@ -1,0 +1,5 @@
+<resources>
+    <string name="facebook_app_id">469802930083701</string>
+    <string name="fb_login_protocol_scheme">fb469802930083701</string>
+    <string name="app_name">BookMyShowEvent</string>
+</resources>

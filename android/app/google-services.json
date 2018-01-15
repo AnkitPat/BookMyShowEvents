@@ -1,0 +1,124 @@
+{
+  "project_info": {
+    "project_number": "488203154306",
+    "firebase_url": "https://checking-8456d.firebaseio.com",
+    "project_id": "checking-8456d",
+    "storage_bucket": "checking-8456d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488203154306:android:af1d2aed9a209cdc",
+        "android_client_info": {
+          "package_name": "com.example.bbi_w1003.exampleCheck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488203154306-bc6017nbrie3lpf9lb5udmc5et2p675o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56S04N3k2kyhTLlhHJVdLiMCBrinO0J8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488203154306:android:747811b2f634c379",
+        "android_client_info": {
+          "package_name": "com.firebasegooglelogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488203154306-ubbidbjmul8ok04oefqtanjlteblh5b5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.firebasegooglelogin",
+            "certificate_hash": "017802c2dcb8921c90e1b80ccaa1c4dd98389db0"
+          }
+        },
+        {
+          "client_id": "488203154306-bc6017nbrie3lpf9lb5udmc5et2p675o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56S04N3k2kyhTLlhHJVdLiMCBrinO0J8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488203154306-bc6017nbrie3lpf9lb5udmc5et2p675o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "488203154306-67nib7ccfiqujqr243jbafnbs34ikiq5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.FIrebaseGoogleLogin"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488203154306:android:14544e123ab6870c",
+        "android_client_info": {
+          "package_name": "com.bookmyshowevent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488203154306-bc6017nbrie3lpf9lb5udmc5et2p675o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC56S04N3k2kyhTLlhHJVdLiMCBrinO0J8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
