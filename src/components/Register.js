@@ -5,7 +5,7 @@ import {View, ScrollView, Text, StyleSheet, TextInput,AsyncStorage, ActivityIndi
 import firebase from 'react-native-firebase'
 
 import {Card, FormLabel, FormInput, Button, FormValidationMessage} from 'react-native-elements'
-import {LoginDone} from "./src/actions/LoginAction";
+import {LoginDone} from "../actions/LoginAction";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

@@ -10,7 +10,7 @@ import {
 import {
     Avatar
 } from 'react-native-elements'
-import LoginStore from "../src/Store/LoginStore";
+import LoginStore from "../Store/LoginStore";
 
 
 export default class CustomSlider extends Component {
@@ -49,7 +49,7 @@ export default class CustomSlider extends Component {
         return (
 
             <View>
-                <ImageBackground source={require('../icons/header_background.jpg')}
+                <ImageBackground source={require('../../icons/header_background.jpg')}
                                  style={{padding: 10}}
                 ><Avatar
                     large
@@ -68,14 +68,14 @@ export default class CustomSlider extends Component {
                     this.props.navigation.navigate('ProfileEditing')
                 }}>
                     <Image style={Styles.menuIconStyle}
-                           source={require('../icons/icons8-user-male-512.png')}/>
+                           source={require('../../icons/icons8-user-male-512.png')}/>
                     <Text style={Styles.menuItemStyle}>Profile</Text>
                 </TouchableOpacity>
 
 
                 <TouchableOpacity style={Styles.menuItemHeaderStyle}>
                     <Image style={Styles.menuIconStyle}
-                           source={require('../icons/icons8-shutdown-50.png')}/>
+                           source={require('../../icons/icons8-shutdown-50.png')}/>
                     <Text style={Styles.menuItemStyle}>Home</Text>
                 </TouchableOpacity>
 
@@ -86,7 +86,7 @@ export default class CustomSlider extends Component {
                                   }}
                 >
 
-                    <Image style={Styles.menuIconStyle} source={require('../icons/icons8-shutdown-50.png')}/><Text
+                    <Image style={Styles.menuIconStyle} source={require('../../icons/icons8-shutdown-50.png')}/><Text
                     style={Styles.menuItemStyle}>Logout</Text>
                 </TouchableOpacity>
 

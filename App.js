@@ -35,8 +35,8 @@ import LoginStore from './src/Store/LoginStore'
 import {LoginDone} from './src/actions/LoginAction'
 
 import firebase from 'react-native-firebase'
-import Register from "./Register";
-import CustomSlider from "./components/CustomSlider";
+import Register from "./src/components/Register";
+import CustomSlider from "./src/components/CustomSlider";
 import DetailEvent from "./src/components/DetailEvent";
 import EventCard from "./src/components/EventCard";
 import EventsListViewRendering from './src/components/EventsListViewRendering'
@@ -337,7 +337,7 @@ class App extends Component {
                         }>
                             <Image style={{width: 70, height: 70, alignSelf: 'center'}}
 
-                                   source={require('./icons8-enter-96.png')}/>
+                                   source={require('./assets/icons8-enter-96.png')}/>
                         </TouchableOpacity> : <ActivityIndicator size="large" color="#0000ff"/>
 
                         }
@@ -349,13 +349,13 @@ class App extends Component {
                                 this.googleLogin()
                             }}>
                                 <Image style={{width: 70, height: 70, alignSelf: 'center'}}
-                                       source={require('./icons8-google-plus-528.png')}/>
+                                       source={require('./assets/icons8-google-plus-528.png')}/>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.facebookLoginButton} onPress={() => {
                                 this.facebookLogin()
                             }}>
                                 <Image style={{width: 60, height: 60, alignSelf: 'center'}}
-                                       source={require('./facebook.png')}/>
+                                       source={require('./assets/facebook.png')}/>
                             </TouchableOpacity>
 
                         </View>

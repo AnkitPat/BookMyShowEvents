@@ -3,7 +3,7 @@ import {
     Text, TouchableOpacity,ToastAndroid
 } from 'react-native'
 
-import styles from './src/style/ButtonStyleSimple'
+import styles from '../style/ButtonStyleSimple'
 
 const Button = ({title,onPress})=> {
     return (

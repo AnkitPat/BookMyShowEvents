@@ -201,7 +201,9 @@ export default class EventHome extends React.Component {
 
                     <StatusBar backgroundColor="#6A0888" barStyle="light-content"/>
                     <Header title={'Events'} visibility={false}
-                            onPress={() => this.props.navigation.navigate('DrawerOpen')
+                            onPress={() => this.setState({
+                                modalVisible:false
+                            })
                             }/>
 
 

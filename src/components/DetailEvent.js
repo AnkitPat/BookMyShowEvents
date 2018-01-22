@@ -10,7 +10,7 @@ import CollapsibleToolbar from 'react-native-collapsible-toolbar';
 import NavBackButton from './NavBackButton';
 
 import {Card} from 'react-native-elements'
-import Button from "../../Button";
+import Button from "./Button";
 
 import EventStore from '../Store/EventStore'
 
