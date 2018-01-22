@@ -5,7 +5,7 @@ export const saveDetails= (image_url,title,address,price,date,full_date,full_pri
     const action = {
         type: 'Event_detail'
     };
-    Dispatcher.dispatch(action,image_url,title,address,price,date,full_date,full_price,full_address)
+    Dispatcher.dispatchEVent(action,image_url,title,address,price,date,full_date,full_price,full_address)
 
 };
 

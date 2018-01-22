@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {
     View, StyleSheet, Text, Image, TouchableOpacity, Alert,
-    Vibration
+    Vibration,Navigator
 } from 'react-native'
 
 import PropTypes from 'prop-types'
@@ -65,11 +65,7 @@ export default class EventCard extends Component {
                         <Text style={Styles.addressStyle}>{this.props.address}</Text>
                     </View>
                     <View style={Styles.ButtonTopView}>
-                        <Button title={'BOOK'} onPress={() => {
-
-                           /* saveDetails(this.props.image, this.props.title, this.props.address, this.props.amount, this.props.date, this.props.full_date, this.props.full_price, this.props.full_address);
-                            this.props.navigator.add({screen:'DetailEvent'})*/
-                        }}/>
+                        <Button title={'BOOK'} onPress={this.props.onPress}/>
                     </View>
                 </View>
                 <View
@@ -170,4 +166,15 @@ EventCard.propTypes = {
     address: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired
 
+};
+
+const RouteMapper = (route, navigationOperations, onComponentRef) => {
+    if (route.name === 'list') {
+        return (
+            // TODO: Add List component
+            <Text>The list is going to be here</Text>
+        );
+    } else if (route.name === 'movie') {
+        // TODO: Add Movie component for a movie detail screen
+    }
 };

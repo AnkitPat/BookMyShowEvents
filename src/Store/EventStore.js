@@ -40,13 +40,13 @@ const handlerAction = (action,image_url,title,address,price,date,full_date,full_
     }
 };
 
-Dispatcher.register(handlerAction);
+Dispatcher.registerEvents(handlerAction);
 
 
 class EventStore extends EventEmitter {
 
     getStore() {
-        console.log('get store method',eventDetail);
+       // console.log('get store method',eventDetail);
         return Object.assign({},eventDetail);
     }
 

@@ -9,7 +9,7 @@ import EventCard from "./EventCard";
 export default class EventsListViewRendering extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        console.log('EvnetListviewRendering',props);
         this.ds = new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1.title !== row2.title
         });
@@ -28,9 +28,11 @@ export default class EventsListViewRendering extends Component {
 
 
     renderRow(rowData, ...rest) {
+
         const index = parseInt(rest[1], 10);
         return (
             <EventCard
+
 
                 onPress={()=>{}}
                 title={rowData.title}

@@ -4,19 +4,23 @@ import EventEmitter from 'EventEmitter'
 import Dispatcher from '../dispatcher/Dispatcher'
 
 const profileInformation = {
-    username: ''
+    username: '',
+    emailId:'',
+    image_url:''
 };
 
-const save = (username) => {
-    console.log('Store here saving',username);
+const save = (username,emailId,image_url) => {
+    console.log('Store here saving',username+emailId+image_url);
     profileInformation.username=username
+    profileInformation.emailId = emailId
+    profileInformation.image_url= image_url
 };
 
 
-const handlerAction = (action,username) => {
+const handlerAction = (action,username,emailId,image_url) => {
     switch (action.type) {
         case 'Login':
-            save(username)
+            save(username,emailId,image_url)
             break;
         default:
             //default things

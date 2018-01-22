@@ -5,6 +5,7 @@ import {View, ScrollView, Text, StyleSheet, TextInput,AsyncStorage, ActivityIndi
 import firebase from 'react-native-firebase'
 
 import {Card, FormLabel, FormInput, Button, FormValidationMessage} from 'react-native-elements'
+import {LoginDone} from "./src/actions/LoginAction";
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -93,10 +94,21 @@ export default class Register extends Component {
                                                 this.setState({loading: false});
                                                 console.log(user)
 
-                                                AsyncStorage.setItem('user_data',JSON.stringify(user))
+                                                var username  =  this.state.email.split("@")[0]
+
+
+                                                firebase.database().ref('users/' + username).set({
+                                                    username: username,
+                                                    email: this.state.email,
+                                                    profile_picture : 'http://www.workspaceit.com/frank/images/user.png'
+                                                });
+
+                                                AsyncStorage.setItem('user_data',username)
                                                 AsyncStorage.setItem('nick_name',this.state.username)
 
                                                 ToastAndroid.show('Registered',ToastAndroid.SHORT)
+
+                                                LoginDone(username,this.state.email,'http://www.workspaceit.com/frank/images/user.png')
 
                                                 this.props.navigation.navigate('Home')
                                             })

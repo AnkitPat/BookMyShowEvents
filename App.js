@@ -15,6 +15,7 @@ import {
     ToastAndroid,
     StyleSheet,
     Modal,
+    StatusBar,
     View,
     TextInput,
     ImageBackground,
@@ -39,6 +40,8 @@ import CustomSlider from "./components/CustomSlider";
 import DetailEvent from "./src/components/DetailEvent";
 import EventCard from "./src/components/EventCard";
 import EventsListViewRendering from './src/components/EventsListViewRendering'
+import EventListView from "./src/components/EventListView";
+import ProfileEditing from "./src/components/ProfileEditing";
 
 var TimerMixin = require('react-timer-mixin');
 
@@ -60,18 +63,37 @@ class App extends Component {
 
     componentWillMount() {
 
-        AsyncStorage.getItem('user_data').then((user_data_json) => {
-            let user_data = JSON.parse(user_data_json);
-            console.log('current User', user_data + " " + user_data.displayName)
+        AsyncStorage.getItem('user_data').then((displayName) => {
 
-            if (user_data) {
+            if (displayName) {
+                console.log('current User',displayName)
+
+
+
+
+
+
+
+                var leadsRef = firebase.database().ref('users/'+displayName);
+                leadsRef.on('value', function(snapshot) {
+
+
+
+                    console.log(snapshot.val())
+
+                    var username = snapshot.val().email;
+                    var photoURL = snapshot.val().profile_picture
+                    LoginDone(displayName, username ,photoURL?photoURL: 'http://www.workspaceit.com/frank/images/user.png');
+
+
+
+                });
+
 
                 this.setState({
-                    username: user_data.displayName,
-                    modalVisible: true
-                })
+                    username: displayName});
 
-                LoginDone(user_data.displayName)
+                this.setState({modalVisible:true})
 
 
             }
@@ -85,15 +107,25 @@ class App extends Component {
     componentDidMount() {
 
 
-            this.timer = setTimeout(() => {
+        this.timer = setTimeout(() => {
 
+            if (this.state.modalVisible) {
                 this.props.navigation.navigate('Home')
                 this.setState({
                     modalVisible: false
                 })
-            }, 1000);
-        
+            }
+        }, 1000);
 
+
+    }
+
+     writeUserData( name, email, imageUrl) {
+        firebase.database().ref('users/' + name).set({
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+        });
     }
 
     facebookLogin() {
@@ -119,12 +151,14 @@ class App extends Component {
                 if (currentUser) {
                     console.log(JSON.stringify(currentUser.toJSON()) + "Ankit")
 
-                    LoginDone(currentUser.providerData.displayName)
+                    LoginDone(currentUser.displayName, currentUser.email, currentUser.photoURL)
+
+                    this.writeUserData(currentUser.displayName,currentUser.email,currentUser.photoURL)
 
                     this.props.navigation.navigate('Home')
                     ToastAndroid.show('Login Successful', ToastAndroid.SHORT)
-                    AsyncStorage.setItem('nick_name', currentUser.providerData.displayName)
-                    AsyncStorage.setItem('user_data', JSON.stringify(currentUser))
+                    AsyncStorage.setItem('nick_name', currentUser.displayName)
+                    AsyncStorage.setItem('user_data', currentUser.displayName)
                 }
             })
             .catch((error) => {
@@ -145,13 +179,17 @@ class App extends Component {
 
                     })
                     .then((currentUser) => {
-                        LoginDone(currentUser.providerData.displayName)
-                        AsyncStorage.setItem('nick_name', currentUser.providerData.displayName)
-                        this.props.navigation.navigate('Home')
-                        ToastAndroid.show('Login Successful', ToastAndroid.SHORT)
-                        AsyncStorage.setItem('user_data', JSON.stringify(currentUser))
+                        LoginDone(currentUser.displayName, currentUser.email, currentUser.photoURL);
 
-                        console.log(JSON.stringify(currentUser.toJSON()))
+                        this.writeUserData(currentUser.displayName,currentUser.email,currentUser.photoURL)
+
+
+                        AsyncStorage.setItem('nick_name', currentUser.displayName);
+                        this.props.navigation.navigate('Home');
+                        ToastAndroid.show('Login Successful', ToastAndroid.SHORT);
+                        AsyncStorage.setItem('user_data', currentUser.displayName);
+
+                        console.log(JSON.stringify(currentUser.toJSON()));
                     })
                     .catch((error) => {
                         console.error(`Login fail with error: ${error}`)
@@ -176,12 +214,17 @@ class App extends Component {
         loginStore: LoginStore.getStore()
     };
 
+
     render() {
+
+        const{navigator} = this.props.navigation
+
 
 
         return (
             <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'grey'}}>
 
+                <StatusBar backgroundColor="#6A0888" barStyle="light-content"/>
                 <Modal
 
                     visible={this.state.modalVisible}
@@ -249,11 +292,34 @@ class App extends Component {
                                     this.setState({
                                         loading: false
                                     });
-                                    LoginDone(this.state.username)
 
-                                    this.props.navigation.navigate('Home')
-                                    ToastAndroid.show('Login Successful', ToastAndroid.SHORT)
-                                    AsyncStorage.setItem('user_data', JSON.stringify(user))
+                                    var email = this.state.username.split("@")[0]
+
+                                    var leadsRef = firebase.database().ref('users/'+email);
+                                    leadsRef.on('value', function(snapshot) {
+
+
+                                        console.log(snapshot.val())
+
+
+                                            var username = snapshot.val().email;
+                                            var photoURL = snapshot.val().profile_picture
+                                            LoginDone(email, username ,photoURL?photoURL: 'http://www.workspaceit.com/frank/images/user.png')
+
+
+                                            ToastAndroid.show('Login Successful', ToastAndroid.SHORT)
+                                            AsyncStorage.setItem('user_data', email)
+
+                                       // navigator.navigate('Home')
+
+                                    });
+
+
+
+                                        this.props.navigation.navigate('Home')
+
+
+
 
                                 })
                                 .catch(() => {
@@ -386,7 +452,9 @@ const SimpleApp = DrawerNavigator({
         Register: {screen: Register},
         EventCard: {screen: EventCard},
         DetailEvent: {screen: DetailEvent},
-        EventsListViewRendering: {screen: EventsListViewRendering}
+        EventsListViewRendering: {screen: EventsListViewRendering},
+        EventListView: {screen: EventListView},
+        ProfileEditing: {screen: ProfileEditing}
     },
     {
         headerMode: 'none',
@@ -395,7 +463,7 @@ const SimpleApp = DrawerNavigator({
         drawerWidth: 200,
         navigationOptions: {
             gesturesEnabled: false,
-            headerLeft:<Text onPress={() => {
+            headerLeft: <Text onPress={() => {
                 // Coming soon: navigation.navigate('DrawerToggle')
                 // https://github.com/react-community/react-navigation/pull/2492
                 if (navigation.state.index === 0) {

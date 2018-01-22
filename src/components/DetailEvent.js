@@ -18,6 +18,7 @@ export default class DetailEvent extends Component {
 
     constructor(props) {
         super(props)
+        console.log(props)
         this.state = {
             eventStore: EventStore.getStore()
         };
@@ -30,8 +31,9 @@ export default class DetailEvent extends Component {
         StatusBar.setBarStyle('light-content');
 
         if (Platform.OS === 'android') {
-            StatusBar.setTranslucent(true);
-            StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.2)', true);
+           // StatusBar.setTranslucent(true);
+
+            //StatusBar.setBackgroundColor('rgba(0, 0, 0, 0.2)', true);
         }
     }
 
@@ -55,19 +57,18 @@ export default class DetailEvent extends Component {
 
     renderContent = () => (
         <View>
-
             <View>
                 <Card containerStyle={{borderRadius: 5, elevation: 6}}>
 
 
-                    <Text style={styles.headerText}>Hello ALl</Text>
+                    <Text style={styles.headerText}>{this.state.eventStore.title}</Text>
 
                     <View style={{marginTop: 20, flex: 1, flexDirection: 'row'}}>
                         <Image source={require('../../assets/location.png')}
                                style={{alignSelf: 'center', flex: 0.1, width: 40, height: 40}}/>
                         <View style={{flexDirection: 'column', flex: 0.9}}>
-                            <Text style={styles.locationText}>Laxmi Lawns: Pune</Text>
-                            <Text style={styles.fullLocationText}>Next to Magarpattacity, 133, Magarpatta,....</Text>
+                            <Text style={styles.locationText}>{this.state.eventStore.address}</Text>
+                            <Text style={styles.fullLocationText}>{this.state.eventStore.full_address}</Text>
                         </View>
                     </View>
 
@@ -75,11 +76,13 @@ export default class DetailEvent extends Component {
                         <Image source={require('../../assets/calendar.png')}
                                style={{alignSelf: 'center', flex: 0.1, width: 40, height: 40}}/>
                         <View style={{flexDirection: 'column', flex: 0.6}}>
-                            <Text style={styles.dateText}>Fri, 09 Feb - Sat, 10 Feb</Text>
-                            <Text style={styles.priceText}>Rs. 1,750 - Rs. 6,999</Text>
+                            <Text style={styles.dateText}>{this.state.eventStore.full_date}</Text>
+                            <Text style={styles.priceText}>{this.state.eventStore.full_price}</Text>
                         </View>
                         <View style={{flex: 0.3, justifyContent: 'center'}}>
-                            <Button title={'BOOK'}/>
+                            <Button title={'BOOK'} onPress={()=>{
+                                this.props.navigation.navigate('ProfileEditing')
+                            }}/>
                         </View>
 
                     </View>
@@ -113,20 +116,21 @@ export default class DetailEvent extends Component {
         >
             <NavBackButton title='' onPress={() => {
                 console.log('ankit back')
+                this.props.navigation.navigate('Home')
             }}/>
-            <Text style={{textAlign: 'center', color: '#FFF'}}>Title</Text>
         </View>
     );
 
     render() {
 
+        this.get
         console.log(this.state.eventStore)
         return (
             <CollapsibleToolbar
                 renderContent={this.renderContent}
                 renderNavBar={this.renderNavBar}
-                imageSource='https://lorempixel.com/400/300/'
-                collapsedNavBarBackgroundColor='#009688'
+                imageSource={this.state.eventStore.image_url}
+                collapsedNavBarBackgroundColor='#6A0888'
                 translucentStatusBar
                 showsVerticalScrollIndicator={false}
                 toolBarHeight={150}

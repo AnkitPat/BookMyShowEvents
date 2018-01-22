@@ -10,16 +10,42 @@ import {
 import {
     Avatar
 } from 'react-native-elements'
+import LoginStore from "../src/Store/LoginStore";
 
 
 export default class CustomSlider extends Component {
     constructor(props)
     {
         super(props)
+        this.state = {
+            store: LoginStore.getStore()
+        };
+        this.getProfile = this.getProfile.bind(this)
+
+    }
+
+
+    componentDidMount() {
+        LoginStore.addLoginListener(this.getProfile)
+    }
+
+    componentWillUnmount() {
+        LoginStore.removeLoginListener(this.getProfile)
+    }
+
+    getProfile() {
+
+        this.state = {
+
+            store: LoginStore.getStore()
+        }
 
     }
 
     render() {
+
+        this.getProfile()
+        console.log('custom slider',this.state.store.username)
         return (
 
             <View>
@@ -28,18 +54,18 @@ export default class CustomSlider extends Component {
                 ><Avatar
                     large
                     rounded
-                    style={{alignSelf:'center',marginTop:20}}
-                    source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
+                    containerStyle={{marginTop:20}}
+                    source={{uri: this.state.store.image_url}}
                     onPress={() => console.log("Works!")}
                     activeOpacity={0.8}
                 />
 
-                    <Text style={{color:'#fff',marginTop:25}}>Ankit Patidar</Text>
-                    <Text style={{color:'#fff',marginTop:5}}>ankitpatidar030@gmail.com</Text>
+                    <Text style={{color:'#fff',marginTop:25}}>{this.state.store.username}</Text>
+                    <Text style={{color:'#fff',marginTop:5}}>{this.state.store.emailId}</Text>
 
                 </ImageBackground>
                 <TouchableOpacity style={Styles.menuItemHeaderStyle} onPress={()=>{
-                    ToastAndroid.show('prfile',ToastAndroid.SHORT)
+                    this.props.navigation.navigate('ProfileEditing')
                 }}>
                     <Image style={Styles.menuIconStyle}
                            source={require('../icons/icons8-user-male-512.png')}/>
@@ -55,8 +81,8 @@ export default class CustomSlider extends Component {
 
                 <TouchableOpacity style={Styles.menuItemHeaderStyle}
                                   onPress={()=>{
-                                      //AsyncStorage.setItem('user_data',null)
-                                      this.props.navigation.navigate('DetailEvent')
+                                      AsyncStorage.setItem('user_data','')
+                                      this.props.navigation.navigate('Login')
                                   }}
                 >
 
