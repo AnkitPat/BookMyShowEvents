@@ -151,7 +151,7 @@ export default class EventHome extends React.Component {
         return (
             <View style={styles.container}>
 
-                <StatusBar backgroundColor="#6A0888" barStyle="light-content"/>
+                <StatusBar backgroundColor="#8839A0" barStyle="light-content"/>
                 <Header title={'Events'} visibility={true} onPress={() => {
                     console.log('drawer')
 

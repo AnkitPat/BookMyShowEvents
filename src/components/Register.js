@@ -88,13 +88,13 @@ export default class Register extends Component {
                                     loading: true
                                 })
                                 if (this.state.email) {
-                                    if (this.state.password === this.state.cpassword) {
+                                    if (this.state.password&&this.state.cpassword&&this.state.password === this.state.cpassword) {
                                         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
                                             .then((user) => {
                                                 this.setState({loading: false});
                                                 console.log(user)
 
-                                                var username  =  this.state.email.split("@")[0]
+                                                var username  =  this.state.email.split("@")[0].replace('.','')
 
 
                                                 firebase.database().ref('users/' + username).set({

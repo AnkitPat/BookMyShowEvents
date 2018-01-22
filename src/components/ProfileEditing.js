@@ -139,7 +139,7 @@ export default class ProfileEditing extends Component {
         return (
 
             <View style={{flex: 1, justifyContent: 'center'}}>
-                <StatusBar backgroundColor="#6A0888" barStyle="light-content"/>
+                <StatusBar backgroundColor="#8839A0" barStyle="light-content"/>
                 <Header title={'Profle'} visibility={false} onPress={() => {
                     console.log('drawer')
 

@@ -58,6 +58,8 @@ class App extends Component {
     constructor(props) {
         super(props)
 
+        this.closeModal = this.closeModal.bind(this)
+
 
     }
 
@@ -70,11 +72,13 @@ class App extends Component {
 
 
 
+                this.setState({modalVisible:true})
 
 
+                this.setState({
+                    username: displayName});
 
-
-                var leadsRef = firebase.database().ref('users/'+displayName);
+                var leadsRef = firebase.database().ref('users/'+displayName.replace(' ',''));
                 leadsRef.on('value', function(snapshot) {
 
 
@@ -86,14 +90,10 @@ class App extends Component {
                     LoginDone(displayName, username ,photoURL?photoURL: 'http://www.workspaceit.com/frank/images/user.png');
 
 
-
                 });
 
 
-                this.setState({
-                    username: displayName});
 
-                this.setState({modalVisible:true})
 
 
             }
@@ -104,7 +104,10 @@ class App extends Component {
     }
 
 
+
+
     componentDidMount() {
+
 
 
         this.timer = setTimeout(() => {
@@ -115,7 +118,7 @@ class App extends Component {
                     modalVisible: false
                 })
             }
-        }, 1000);
+        }, 3000);
 
 
     }
@@ -153,12 +156,12 @@ class App extends Component {
 
                     LoginDone(currentUser.displayName, currentUser.email, currentUser.photoURL)
 
-                    this.writeUserData(currentUser.displayName,currentUser.email,currentUser.photoURL)
+                    this.writeUserData(currentUser.displayName.replace(' ',''),currentUser.email,currentUser.photoURL)
 
                     this.props.navigation.navigate('Home')
                     ToastAndroid.show('Login Successful', ToastAndroid.SHORT)
-                    AsyncStorage.setItem('nick_name', currentUser.displayName)
-                    AsyncStorage.setItem('user_data', currentUser.displayName)
+                    AsyncStorage.setItem('nick_name', currentUser.displayName.replace(' ',''))
+                    AsyncStorage.setItem('user_data', currentUser.displayName.replace(' ',''))
                 }
             })
             .catch((error) => {
@@ -181,13 +184,13 @@ class App extends Component {
                     .then((currentUser) => {
                         LoginDone(currentUser.displayName, currentUser.email, currentUser.photoURL);
 
-                        this.writeUserData(currentUser.displayName,currentUser.email,currentUser.photoURL)
+                        this.writeUserData(currentUser.displayName.replace(' ',''),currentUser.email,currentUser.photoURL)
 
 
                         AsyncStorage.setItem('nick_name', currentUser.displayName);
                         this.props.navigation.navigate('Home');
                         ToastAndroid.show('Login Successful', ToastAndroid.SHORT);
-                        AsyncStorage.setItem('user_data', currentUser.displayName);
+                        AsyncStorage.setItem('user_data', currentUser.displayName.replace(' ',''));
 
                         console.log(JSON.stringify(currentUser.toJSON()));
                     })
@@ -295,7 +298,7 @@ class App extends Component {
 
                                     var email = this.state.username.split("@")[0]
 
-                                    var leadsRef = firebase.database().ref('users/'+email);
+                                    var leadsRef = firebase.database().ref('users/'+email.replace(' ',''));
                                     leadsRef.on('value', function(snapshot) {
 
 
@@ -308,7 +311,7 @@ class App extends Component {
 
 
                                             ToastAndroid.show('Login Successful', ToastAndroid.SHORT)
-                                            AsyncStorage.setItem('user_data', email)
+                                            AsyncStorage.setItem('user_data', email.replace(' ',''))
 
                                        // navigator.navigate('Home')
 
